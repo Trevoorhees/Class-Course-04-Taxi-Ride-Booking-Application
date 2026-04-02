@@ -1,0 +1,13 @@
+{
+  "bookings": [
+    {
+      "id": "1",
+      "fullName": "Sample Rider",
+      "phone": "5551234567",
+      "pickup": "Airport Terminal A",
+      "dropoff": "Downtown Hotel",
+      "service": "Airport Transfer",
+      "date": "2026-04-10"
+    }
+  ]
+}
