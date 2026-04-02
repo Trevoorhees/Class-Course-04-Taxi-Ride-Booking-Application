@@ -1,0 +1,1005 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book_A_Taxi</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+
+
+db.json 
+
+{
+  "bookings": [
+    {
+      "id": "1",
+      "fullName": "Sample Rider",
+      "phone": "5551234567",
+      "pickup": "Airport Terminal A",
+      "dropoff": "Downtown Hotel",
+      "service": "Airport Transfer",
+      "date": "2026-04-10"
+    }
+  ]
+}
+
+
+main.jsx
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router";
+import App from "./App";
+import "./styles/app.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+
+app.jsx
+
+import { Route, Routes } from "react-router";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
+import Booking from "./pages/Booking";
+
+function App() {
+  return (
+    <div className="site-wrapper">
+      <Navbar />
+
+      <main className="site-main">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/booking" element={<Booking />} />
+        </Routes>
+      </main>
+
+      <footer className="site-footer">
+        <p>© 2026 Book_A_Taxi. Safe rides. Easy booking.</p>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
+
+
+app.css
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: #e5e7eb;
+  background: #0f172a;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 30%),
+    linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  color: #e5e7eb;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  flex: 1;
+  padding: 32px 0 40px;
+}
+
+.navbar {
+  width: min(1200px, calc(100% - 32px));
+  margin: 24px auto 0;
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+}
+
+.brand-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.brand-subtitle {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: #cbd5e1;
+  transition: 0.2s ease;
+}
+
+.nav-link:hover {
+  background: rgba(148, 163, 184, 0.12);
+  color: #ffffff;
+}
+
+.nav-link.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.page {
+  display: grid;
+  gap: 28px;
+}
+
+.hero-card,
+.info-card {
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.78);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+}
+
+.hero-card {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.hero-copy h2,
+.section-header h2 {
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.hero-text,
+.section-header p,
+.info-card p,
+.booking-item p {
+  color: #cbd5e1;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  color: #60a5fa;
+  margin-bottom: 12px;
+}
+
+.hero-actions {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.hero-stat {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.hero-stat-number {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.hero-stat-label {
+  color: #94a3b8;
+}
+
+.card-grid,
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.info-card {
+  padding: 24px;
+}
+
+.info-card h3,
+.booking-card h3,
+.booking-item h4 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.section-header {
+  max-width: 820px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: rgba(148, 163, 184, 0.2);
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 20px;
+}
+
+.booking-card {
+  min-height: 100%;
+}
+
+.booking-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field label {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.9);
+  color: #ffffff;
+  outline: none;
+}
+
+.form-field input::placeholder {
+  color: #94a3b8;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.16);
+}
+
+.error {
+  color: #fca5a5;
+  font-size: 0.92rem;
+}
+
+.status-message {
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.status-message.success {
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+}
+
+.status-message.error {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.booking-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.booking-item {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(30, 41, 59, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.site-footer {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto 24px;
+  padding: 18px 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(15, 23, 42, 0.72);
+  color: #94a3b8;
+  text-align: center;
+}
+
+@media (max-width: 950px) {
+  .hero-card,
+  .booking-layout,
+  .card-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-main {
+    width: min(100% - 20px, 1200px);
+    padding-top: 20px;
+  }
+
+  .navbar,
+  .site-footer {
+    width: min(100% - 20px, 1200px);
+  }
+
+  .hero-card,
+  .info-card {
+    padding: 20px;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-link {
+    padding: 9px 12px;
+  }
+}
+
+
+about.jsx
+
+function About() {
+  return (
+    <section className="page">
+      <div className="section-header">
+        <p className="eyebrow">About Us</p>
+        <h2>Who we are</h2>
+        <p>
+          Book_A_Taxi is a front-end taxi ride booking application designed to
+          provide a clean, organized, and user-friendly experience.
+        </p>
+      </div>
+
+      <div className="card-grid">
+        <article className="info-card">
+          <h3>Our Mission</h3>
+          <p>
+            To make transportation booking simple, efficient, and accessible for
+            everyday riders.
+          </p>
+        </article>
+
+        <article className="info-card">
+          <h3>Our Focus</h3>
+          <p>
+            We focus on clear navigation, easy service browsing, and quick ride
+            booking with basic validation.
+          </p>
+        </article>
+
+        <article className="info-card">
+          <h3>Our Promise</h3>
+          <p>
+            Safe, comfortable, and reliable travel options for local and
+            long-distance needs.
+          </p>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+export default About;
+
+
+booking.jsx
+
+import { useEffect, useMemo, useState } from "react";
+
+const API_URL = "http://localhost:3000/bookings";
+
+function Booking() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    pickup: "",
+    dropoff: "",
+    service: "",
+    date: ""
+  });
+
+  const [errors, setErrors] = useState({});
+  const [statusMessage, setStatusMessage] = useState("");
+  const [statusType, setStatusType] = useState("");
+  const [bookings, setBookings] = useState([]);
+  const [loadingBookings, setLoadingBookings] = useState(true);
+
+  const today = useMemo(() => new Date().toISOString().split("T")[0], []);
+
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  async function fetchBookings() {
+    try {
+      setLoadingBookings(true);
+
+      const response = await fetch(API_URL);
+
+      if (!response.ok) {
+        throw new Error("Unable to load bookings.");
+      }
+
+      const data = await response.json();
+      setBookings([...data].reverse());
+    } catch (error) {
+      setStatusMessage(
+        "Could not load bookings. Make sure JSON Server is running."
+      );
+      setStatusType("error");
+    } finally {
+      setLoadingBookings(false);
+    }
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setFormData((currentFormData) => ({
+      ...currentFormData,
+      [name]: value
+    }));
+
+    setErrors((currentErrors) => ({
+      ...currentErrors,
+      [name]: ""
+    }));
+  }
+
+  function validateForm() {
+    const newErrors = {};
+    const phonePattern = /^[0-9]{10,15}$/;
+
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "Full name is required.";
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required.";
+    } else if (!phonePattern.test(formData.phone.trim())) {
+      newErrors.phone = "Phone number must contain 10 to 15 digits only.";
+    }
+
+    if (!formData.pickup.trim()) {
+      newErrors.pickup = "Pickup location is required.";
+    }
+
+    if (!formData.dropoff.trim()) {
+      newErrors.dropoff = "Drop-off location is required.";
+    }
+
+    if (!formData.service) {
+      newErrors.service = "Please select a service.";
+    }
+
+    if (!formData.date) {
+      newErrors.date = "Please select a ride date.";
+    }
+
+    return newErrors;
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const validationErrors = validateForm();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      setStatusMessage("Please correct the highlighted form errors.");
+      setStatusType("error");
+      return;
+    }
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error("Booking submission failed.");
+      }
+
+      setStatusMessage("Booking submitted successfully.");
+      setStatusType("success");
+
+      setFormData({
+        fullName: "",
+        phone: "",
+        pickup: "",
+        dropoff: "",
+        service: "",
+        date: ""
+      });
+
+      setErrors({});
+      fetchBookings();
+    } catch (error) {
+      setStatusMessage(
+        "Could not submit booking. Make sure JSON Server is running."
+      );
+      setStatusType("error");
+    }
+  }
+
+  return (
+    <section className="page">
+      <div className="section-header">
+        <p className="eyebrow">Booking</p>
+        <h2>Book a ride</h2>
+        <p>
+          Fill out the form below to schedule a taxi ride. This form includes
+          basic client-side validation and saves data to JSON Server.
+        </p>
+      </div>
+
+      <div className="booking-layout">
+        <div className="info-card booking-card">
+          <h3>Ride Details</h3>
+
+          <form className="booking-form" onSubmit={handleSubmit} noValidate>
+            <div className="form-field">
+              <label htmlFor="fullName">Full Name</label>
+              <input
+                id="fullName"
+                type="text"
+                name="fullName"
+                placeholder="Enter your full name"
+                value={formData.fullName}
+                onChange={handleChange}
+              />
+              {errors.fullName && <p className="error">{errors.fullName}</p>}
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="phone">Phone Number</label>
+              <input
+                id="phone"
+                type="text"
+                name="phone"
+                placeholder="Enter digits only"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+              {errors.phone && <p className="error">{errors.phone}</p>}
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="pickup">Pickup Location</label>
+              <input
+                id="pickup"
+                type="text"
+                name="pickup"
+                placeholder="Enter pickup location"
+                value={formData.pickup}
+                onChange={handleChange}
+              />
+              {errors.pickup && <p className="error">{errors.pickup}</p>}
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="dropoff">Drop-off Location</label>
+              <input
+                id="dropoff"
+                type="text"
+                name="dropoff"
+                placeholder="Enter destination"
+                value={formData.dropoff}
+                onChange={handleChange}
+              />
+              {errors.dropoff && <p className="error">{errors.dropoff}</p>}
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="service">Service Type</label>
+              <select
+                id="service"
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+              >
+                <option value="">Select a service</option>
+                <option value="City Ride">City Ride</option>
+                <option value="Airport Transfer">Airport Transfer</option>
+                <option value="Hourly Booking">Hourly Booking</option>
+                <option value="Out-of-Town Trip">Out-of-Town Trip</option>
+              </select>
+              {errors.service && <p className="error">{errors.service}</p>}
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="date">Ride Date</label>
+              <input
+                id="date"
+                type="date"
+                name="date"
+                min={today}
+                value={formData.date}
+                onChange={handleChange}
+              />
+              {errors.date && <p className="error">{errors.date}</p>}
+            </div>
+
+            <button type="submit" className="btn btn-primary full-width">
+              Submit Booking
+            </button>
+
+            {statusMessage && (
+              <p className={`status-message ${statusType}`}>{statusMessage}</p>
+            )}
+          </form>
+        </div>
+
+        <div className="info-card booking-card">
+          <h3>Recent Bookings</h3>
+
+          {loadingBookings ? (
+            <p>Loading bookings...</p>
+          ) : bookings.length === 0 ? (
+            <p>No bookings saved yet.</p>
+          ) : (
+            <div className="booking-list">
+              {bookings.map((booking) => (
+                <article className="booking-item" key={booking.id}>
+                  <h4>{booking.fullName}</h4>
+                  <p>
+                    <strong>Service:</strong> {booking.service}
+                  </p>
+                  <p>
+                    <strong>From:</strong> {booking.pickup}
+                  </p>
+                  <p>
+                    <strong>To:</strong> {booking.dropoff}
+                  </p>
+                  <p>
+                    <strong>Date:</strong> {booking.date}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {booking.phone}
+                  </p>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Booking;
+
+
+contact.jsx
+
+function Contact() {
+  return (
+    <section className="page">
+      <div className="section-header">
+        <p className="eyebrow">Contact</p>
+        <h2>Get in touch</h2>
+        <p>
+          Reach out with ride questions, booking support, or general inquiries.
+        </p>
+      </div>
+
+      <div className="contact-grid">
+        <article className="info-card">
+          <h3>Office</h3>
+          <p>Book_A_Taxi Headquarters</p>
+          <p>123 Main Street</p>
+          <p>Los Angeles, CA 90001</p>
+        </article>
+
+        <article className="info-card">
+          <h3>Phone</h3>
+          <p>(555) 123-4567</p>
+          <p>Available daily for customer support.</p>
+        </article>
+
+        <article className="info-card">
+          <h3>Email</h3>
+          <p>support@bookataxi.com</p>
+          <p>bookings@bookataxi.com</p>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+export default Contact;
+
+
+home.jsx
+
+import { Link } from "react-router";
+
+function Home() {
+  return (
+    <section className="page">
+      <div className="hero-card">
+        <div className="hero-copy">
+          <p className="eyebrow">Fast • Reliable • Comfortable</p>
+          <h2>Book your next taxi ride in minutes.</h2>
+          <p className="hero-text">
+            Book_A_Taxi helps riders schedule city travel, airport pickups,
+            hourly rides, and out-of-town trips with a clean and modern booking
+            experience.
+          </p>
+
+          <div className="hero-actions">
+            <Link to="/booking" className="btn btn-primary">
+              Book Now
+            </Link>
+
+            <Link to="/services" className="btn btn-secondary">
+              View Services
+            </Link>
+          </div>
+        </div>
+
+        <div className="hero-panel">
+          <div className="hero-stat">
+            <span className="hero-stat-number">24/7</span>
+            <span className="hero-stat-label">Ride support</span>
+          </div>
+
+          <div className="hero-stat">
+            <span className="hero-stat-number">4</span>
+            <span className="hero-stat-label">Core service types</span>
+          </div>
+
+          <div className="hero-stat">
+            <span className="hero-stat-number">1</span>
+            <span className="hero-stat-label">Easy booking form</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="card-grid">
+        <article className="info-card">
+          <h3>Airport Transfers</h3>
+          <p>
+            Pre-book dependable airport pickups and drop-offs for stress-free
+            travel.
+          </p>
+        </article>
+
+        <article className="info-card">
+          <h3>City Rides</h3>
+          <p>
+            Get across town quickly with affordable and convenient local taxi
+            service.
+          </p>
+        </article>
+
+        <article className="info-card">
+          <h3>Flexible Scheduling</h3>
+          <p>
+            Choose your service type, pickup point, destination, and ride date
+            in one place.
+          </p>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+export default Home;
+
+
+services.jsx
+
+function Services() {
+  const services = [
+    {
+      title: "City Ride",
+      description:
+        "Perfect for local transportation to work, shopping, appointments, and everyday travel."
+    },
+    {
+      title: "Airport Transfer",
+      description:
+        "Reliable airport pickups and drop-offs scheduled in advance for convenience."
+    },
+    {
+      title: "Hourly Booking",
+      description:
+        "Reserve a taxi for flexible hourly use when you need multiple stops."
+    },
+    {
+      title: "Out-of-Town Trip",
+      description:
+        "Comfortable rides for longer-distance travel outside the city."
+    }
+  ];
+
+  return (
+    <section className="page">
+      <div className="section-header">
+        <p className="eyebrow">Our Services</p>
+        <h2>Choose the ride that fits your trip</h2>
+        <p>
+          We offer multiple service categories so riders can choose the best
+          option for their travel needs.
+        </p>
+      </div>
+
+      <div className="card-grid">
+        {services.map((service) => (
+          <article className="info-card" key={service.title}>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default Services;
+
+
+navbar.jsx
+
+import { NavLink } from "react-router";
+
+function Navbar() {
+  const getNavClass = ({ isActive }) =>
+    isActive ? "nav-link active" : "nav-link";
+
+  return (
+    <header className="navbar">
+      <div className="brand-block">
+        <h1 className="brand-title">Book_A_Taxi</h1>
+        <p className="brand-subtitle">City rides made simple</p>
+      </div>
+
+      <nav className="nav-links">
+        <NavLink to="/" end className={getNavClass}>
+          Home
+        </NavLink>
+
+        <NavLink to="/about" className={getNavClass}>
+          About
+        </NavLink>
+
+        <NavLink to="/services" className={getNavClass}>
+          Services
+        </NavLink>
+
+        <NavLink to="/contact" className={getNavClass}>
+          Contact
+        </NavLink>
+
+        <NavLink to="/booking" className={getNavClass}>
+          Book a Ride
+        </NavLink>
+      </nav>
+    </header>
+  );
+}
+
+export default Navbar;
